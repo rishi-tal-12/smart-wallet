@@ -17,6 +17,7 @@ import Polygonfundme from "./pages/Polygonfundme";
 import Solanafundme from "./pages/Solanafundme";
 import Avalanchefundme from "./pages/Avalanchefundme";
 import Withdraw from "./pages/Withdraw";
+import SmartWallets from "./pages/smartwallets";
 
 const queryClient = new QueryClient();
 
@@ -39,7 +40,7 @@ const App = () => (
           <Route path="/Solanafundme" element ={<Solanafundme/>}/>
           <Route path="/Avalanchefundme" element={<Avalanchefundme/>}/>
          <Route path="/withdraw" element={<Withdraw />} />
-
+          <Route path="/smart-wallets" element={<SmartWallets/>}/>
          <Route   path="/beneficiary-dashboard"
             element={<BeneficiaryDashboard />}
           />

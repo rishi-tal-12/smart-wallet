@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import Header from "@/components/Header";
 import { Wallet, Loader2, CheckCircle } from "lucide-react";
+import {ethers} from "ethers"; 
 
 const Connect = () => {
   const navigate = useNavigate();
@@ -12,17 +13,31 @@ const Connect = () => {
   const userType = searchParams.get("type");
   const [connectionState, setConnectionState] = useState("idle");
 
-  const handleConnectWallet = async () => {
+const handleConnectWallet = async () => {
+  try {
     setConnectionState("connecting");
 
-    // Simulate wallet connection process
-    await new Promise((resolve) => setTimeout(resolve, 2000));
-    setConnectionState("connected");
+    if (!window.ethereum) {
+      alert("MetaMask is not installed. Please install it to continue.");
+      setConnectionState("idle");
+      return;
+    }
 
+    // Request wallet connection
+    const provider = new ethers.BrowserProvider(window.ethereum);
+    const accounts = await provider.send("eth_requestAccounts", []);
+    const signer = await provider.getSigner();
+
+    const address = await signer.getAddress();
+    console.log("Connected wallet address:", address);
+
+    // Simulate connection animations
+    setConnectionState("connected");
     await new Promise((resolve) => setTimeout(resolve, 1000));
+
     setConnectionState("success");
 
-    // Navigate after animation
+    // Redirect after short delay
     setTimeout(() => {
       if (userType === "testator") {
         navigate("/dashboard");
@@ -30,7 +45,12 @@ const Connect = () => {
         navigate("/beneficiary-dashboard");
       }
     }, 1500);
-  };
+  } catch (err) {
+    console.error("Wallet connection failed", err);
+    setConnectionState("idle");
+  }
+};
+
 
   const handleBack = () => {
     navigate("/");

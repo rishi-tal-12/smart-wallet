@@ -6,7 +6,7 @@ import { Card } from "@/components/ui/card";
 import Header from "@/components/Header";
 import ManageBeneficiariesModal from "@/components/ManageBeneficiariesModal";
 import DigitalAssetsModal from "@/components/DigitalAssetsModal";
-import { Edit, Users, BarChart3 } from "lucide-react";
+import { Edit, Users, BarChart3, Eye } from "lucide-react";
 
 const Dashboard = () => {
   const navigate = useNavigate();
@@ -32,9 +32,7 @@ const Dashboard = () => {
   return (
     <motion.div
       className="min-h-screen"
-      style={{
-        background: "linear-gradient(to bottom, #ffffff, #fafbfc)",
-      }}
+      style={{ background: "linear-gradient(to bottom, #ffffff, #fafbfc)" }}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.6 }}
@@ -53,34 +51,33 @@ const Dashboard = () => {
             Testator Dashboard
           </h1>
           <p className="text-gray-600">
-            Create and manage your digital will to secure your assets for your
-            beneficiaries
+            Create and manage your digital will to secure your assets for your beneficiaries
           </p>
         </motion.div>
-        </div>
-        <div className="container mx-auto px-6 py-8 max-w-4xl">
-        {/* Smart Wallet Action Buttons */}
-<motion.div
-  className="mb-6"
-  initial={{ opacity: 0, y: 20 }}
-  animate={{ opacity: 1, y: 0 }}
-  transition={{ duration: 0.6 }}
->
-  <div className="flex gap-4 justify-center">
-    <Button
-      onClick={() => navigate("/Deploysmartwallet")}
-      className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-md font-medium"
-    >
-      Deploy/Fund Smart Wallet
-    </Button>
-    <Button
-      onClick={() => navigate("/withdraw")}
-      className="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-md font-medium"
-    >
-      Withdraw or Transfer Funds
-    </Button>
-  </div>
-</motion.div>
+
+        {/* Smart Wallet Buttons */}
+        <motion.div
+          className="mb-6"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+        >
+          <div className="flex gap-4 justify-center">
+            <Button
+              onClick={() => navigate("/Deploysmartwallet")}
+              className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-md font-medium"
+            >
+              Deploy Smart Wallet
+            </Button>
+            <Button
+              onClick={() => navigate("/smart-wallets")}
+              className="bg-purple-600 hover:bg-purple-700 text-white px-6 py-3 rounded-md font-medium flex items-center gap-2"
+            >
+              <Eye className="w-4 h-4" />
+              View Smart Wallets
+            </Button>
+          </div>
+        </motion.div>
 
         {/* Digital Will Status Card */}
         <motion.div
